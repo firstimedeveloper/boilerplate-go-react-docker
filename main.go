@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -71,8 +72,18 @@ func showMessage(w http.ResponseWriter, r *http.Request) {
 	w.Write(output)
 }
 
+func contact(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "contact us page")
+}
+
+func about(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "about us page")
+}
+
 func main() {
 	router := mux.NewRouter()
+	router.HandleFunc("/about-us", about)
+	router.HandleFunc("/contact-us", contact)
 	router.HandleFunc("/hello", showMessage)
 	router.HandleFunc("/api/health", func(w http.ResponseWriter, r *http.Request) {
 		// an example API handler
