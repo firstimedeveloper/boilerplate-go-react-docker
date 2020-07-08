@@ -4,6 +4,10 @@ all: ui build run
 ui:
 	@cd ui && npm run build && cd ..
 
+.PHONY: run-ui
+run-ui:
+	@cd ui && npm start
+
 build:
 	@docker build -t webserver .
 run:
